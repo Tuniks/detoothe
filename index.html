@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>Lops</title>
+<!-- 		<script src="../build/three.min.js"></script>
+		<script src=".dat.gui.min.js"></script>
+		<script src="../build/OrbitControls.js"></script>
+ -->
+		<style>
+			body {
+				font-family: Monospace;
+				background-color: #FFFFFF;
+				color: #000000;
+				margin: 0px;
+				overflow: hidden;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-around;
+				margin-right: 200px;
+				margin-left: 200px;
+				margin-top: 200px;
+				font: 24px;
+			}
+/*			#info {
+				position: absolute;
+				top: 10px;
+				width: 100%;
+				z-index: 100;
+				display:block;
+			}*/
+			#list {
+				width: 40%;
+				height: 100%;
+				text-align: left;
+				list-style: none;
+			}
+			ul {
+					list-style: none;
+			}
+			a { 
+				text-decoration: none;
+			}
+			a:visited {
+				color: #0000ee;
+			}
+			#c {
+				width: 30%;
+
+			}
+			#description {
+				width: 15%;
+				color: #0000ee;
+			}
+
+		</style>
+
+	</head>
+	<body>
+<!-- 		<div id="list">
+			
+
+		</div>
+
+		<canvas id="c"> </canvas>
+
+		<div id="info">
+			w - aumenta &nbsp;&nbsp; s - diminui &nbsp;&nbsp; o - camera 2D &nbsp;&nbsp; p - camera 3D
+			<br>
+			botao esquerdo - camera &nbsp;&nbsp; scroll - zoom
+			<br>
+			1 - tijolo &nbsp;&nbsp; 2 - flor &nbsp;&nbsp; 3 - anos 90 &nbsp;&nbsp; 4 - dinossauro
+			<br>
+			5 - toggle color 
+		</div>
+
+		<script src="main.js"></script>	 -->
+
+		<div id="list">
+			<ul>
+				<li> <a href=""> Hello :-) </a> </li>
+				<li> <a href="">< about me </a> </li>
+				<li> <a href="">< my work </a> </li>
+			</ul>
+
+		</div>
+
+		<canvas id="c"> </canvas>
+
+		<div id="description">
+			aqui fica no canto lorem ipsum abejoadfsnjiasufhn san dfijnsdif asdifn sadifn sdaifnsdflksnadflkadsnfklsadhf uisdahf oasdifnbsadjofnsadlkfnsoa fdhoijdfgihojd fghjdf hoijdfhoidjfghoidjf ghoijdf ghoijdfgohijd fghoij dfghoijd fgohijdgohidjfghoidjfghoidjnhoidfnh olidfgnhdifgjnhdflgkjhndflkhjndfhlkdjfnhlkdjfnhlkdfjhn dofkhn dif hdifu hodihn oidhn oidn dfoinh oidfhn oidfnh oidfunh odfinh odfinh oidfn hoidfnh oidfn hofdnh oifdgnhodfknh odlfghndfpohjndfoihndfgohindfo hijndfghijdfnho dfiunho idfjhnodfiuhndfoihndfggohjndfo hudfn holdifnhodfiuhn dfihn dfohinmfd ohiudfn hpjdnf
+
+		</div>
+
+
+
+		<script type="module">
+			import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/build/three.module.js';
+			import {OrbitControls} from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/controls/OrbitControls.js';
+			import {OBJLoader2} from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/loaders/OBJLoader2.js';
+
+			function main() {
+			  const canvas = document.querySelector('#c');
+			  const renderer = new THREE.WebGLRenderer({canvas});
+
+			  const fov = 45;
+			  const aspect = 2;  // the canvas default
+			  const near = 0.1;
+			  const far = 100;
+			  const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+			  camera.position.set(0, 10, 20);
+
+			  const controls = new OrbitControls(camera, canvas);
+			  controls.target.set(0, 5, 0);
+			  controls.update();
+
+			  const scene = new THREE.Scene();
+			  scene.background = new THREE.Color('transparent');
+
+			  // {
+			  //   const planeSize = 40;
+
+			  //   const loader = new THREE.TextureLoader();
+			  //   const texture = loader.load('https://threejsfundamentals.org/threejs/resources/images/checker.png');
+			  //   texture.wrapS = THREE.RepeatWrapping;
+			  //   texture.wrapT = THREE.RepeatWrapping;
+			  //   texture.magFilter = THREE.NearestFilter;
+			  //   const repeats = planeSize / 2;
+			  //   texture.repeat.set(repeats, repeats);
+
+			  //   const planeGeo = new THREE.PlaneBufferGeometry(planeSize, planeSize);
+			  //   const planeMat = new THREE.MeshPhongMaterial({
+			  //     map: texture,
+			  //     side: THREE.DoubleSide,
+			  //   });
+			  //   const mesh = new THREE.Mesh(planeGeo, planeMat);
+			  //   mesh.rotation.x = Math.PI * -.5;
+			  //   scene.add(mesh);
+			  // }
+
+			  {
+			    const skyColor = 0xB1E1FF;  // light blue
+			    const groundColor = 0xB97A20;  // brownish orange
+			    const intensity = 1;
+			    const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
+			    scene.add(light);
+			  }
+
+			  {
+			    const color = 0xFFFFFF;
+			    const intensity = 1;
+			    const light = new THREE.DirectionalLight(color, intensity);
+			    light.position.set(0, 10, 0);
+			    light.target.position.set(-5, 0, 0);
+			    scene.add(light);
+			    scene.add(light.target);
+			  }
+
+			  {
+			    const objLoader = new OBJLoader2();
+			    objLoader.load('https://threejsfundamentals.org/threejs/resources/models/windmill/windmill.obj', (root) => {
+			      scene.add(root);
+			    });
+			  }
+
+			  function resizeRendererToDisplaySize(renderer) {
+			    const canvas = renderer.domElement;
+			    const width = canvas.clientWidth;
+			    const height = canvas.clientHeight;
+			    const needResize = canvas.width !== width || canvas.height !== height;
+			    if (needResize) {
+			      renderer.setSize(width, height, false);
+			    }
+			    return needResize;
+			  }
+
+			  function render() {
+
+			    if (resizeRendererToDisplaySize(renderer)) {
+			      const canvas = renderer.domElement;
+			      camera.aspect = canvas.clientWidth / canvas.clientHeight;
+			      camera.updateProjectionMatrix();
+			    }
+
+			    renderer.render(scene, camera);
+
+			    requestAnimationFrame(render);
+			  }
+
+			  requestAnimationFrame(render);
+			}
+
+			main();
+		</script>
+	</body>
+</html>

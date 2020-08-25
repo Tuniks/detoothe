@@ -1,0 +1,38 @@
+body {
+	font-family: Monospace;
+	background-color: #FFFFFF;
+	color: #000000;
+	margin: 0px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	margin-right: 200px;
+	margin-left: 200px;
+	margin-top: 200px;
+	font: 24px;
+}
+#list {
+	width: 40%;
+	height: 100%;
+	text-align: left;
+	list-style: none;
+	margin-left: 20px;
+}
+ul {
+		list-style: none;
+}
+a { 
+	text-decoration: none;
+}
+a:visited {
+	color: #0000ee;
+}
+#c {
+	width: 30%;
+
+}
+#description {
+	width: 15%;
+	color: #0000ee;
+}

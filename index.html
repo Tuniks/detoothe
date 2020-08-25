@@ -78,11 +78,11 @@
 
 			  {
 			    const mtlLoader = new MTLLoader();
-				mtlLoader.load('https://threejsfundamentals.org/threejs/resources/models/windmill/windmill.mtl', (mtlParseResult) => {
+				mtlLoader.load('https://raw.githubusercontent.com/Tuniks/detoothe/master/teste2.mtl', (mtlParseResult) => {
 				  const objLoader = new OBJLoader2();
 				  const materials =  MtlObjBridge.addMaterialsFromMtlLoader(mtlParseResult);
 				  objLoader.addMaterials(materials);
-				  objLoader.load('https://threejsfundamentals.org/threejs/resources/models/windmill/windmill.obj', (root) => {
+				  objLoader.load('https://raw.githubusercontent.com/Tuniks/detoothe/master/teste2.obj', (root) => {
 				    scene.add(root);
 				  });
 				});

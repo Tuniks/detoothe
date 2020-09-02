@@ -76,23 +76,24 @@
 			scene.background = new THREE.Color('#F7F6F0');
 
 			{
-				const skyColor = "#FFF8F8";  // light blue
-				const groundColor = "#FFF8F8";  // brownish orange
-				const intensity = 10;
-				const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
-				scene.add(light);
+				// const skyColor = "#FFF8F8";  // light blue
+				// const groundColor = "#FFF8F8";  // brownish orange
+				// const intensity = 1;
+				// const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
+				// scene.add(light);
 			}
 
 			{
-				const color = 0xFFFFFF;
-				// const intensity = 0.2;
-				// const light = new THREE.AmbientLight(color, intensity);
-				// light.position.set(0, 10, 0);
+				const color = 0xffffff;
+				const intensity = 1;
+				const light = new THREE.PointLight(color, intensity);
+				light.position.set(0, 100, 100);
 				// light.target.position.set(-5, 0, 0);
-				// scene.add(light);
-				// scene.add(light.target);
-				var light = new THREE.AmbientLight(0xFFFFFF); // soft white light
 				scene.add(light);
+				// scene.add(light.target);
+
+				var light2 = new THREE.AmbientLight(0xFFF8F8); // soft white light
+				light2.intensity = 1.75;
 			}
 
 			{
@@ -100,7 +101,17 @@
 				mtlLoader.load('https://raw.githubusercontent.com/Tuniks/detoothe/master/teste2.mtl', (mtlParseResult) => {
 					const objLoader = new OBJLoader2();
 					const materials = MtlObjBridge.addMaterialsFromMtlLoader(mtlParseResult);
+					
+					materials['Material.005'].color.set('white');
+					// materials['Material.005'].flatShading = false;
+					// materials['Material.006'].emiss
+					// materials['Material.007']
+					// materials['Material.008']
+					// materials['Material.009']
+
+
 					objLoader.addMaterials(materials);
+					console.log(materials['Material.005']);
 					objLoader.load('https://raw.githubusercontent.com/Tuniks/detoothe/master/teste2.obj', (root) => {
 						scene.add(root);
 						

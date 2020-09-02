@@ -31,6 +31,8 @@ a:visited {
 }
 #c {
 	width: 34%;
+	outline: none;
+	border: none;
 
 }
 #description {

@@ -1,123 +1,145 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset=utf-8>
-		<title>Lops</title>
 
-		<link rel="stylesheet" href="styles.css">
-
-	</head>
-	<body>
-		<div id="list">
-			<ul>
-				<li> <a href=""> Hello :-) </a> </li>
-				<li> <a href="">< about me </a> </li>
-				<li> <a href="">< my work </a> </li>
-				<div> 
-					<ul>
-						<li> asubdiu </li>
-						<li> asubsdfsdiu </li>
-						<li> asubdfsddiu </li>
-					</ul>
-				</div>
-			</ul>
-
-		</div>
-
-		<canvas id="c"> </canvas>
-
-		<div id="description">
-			aqui fica no canto lorem ipsum abejoadfsnjiasufhn san dfijnsdif asdifn sadifn sdaifnsdflksnadflkadsnfklsadhf uisdahf oasdifnbsadjofnsadlkfnsoa fdhoijdfgihojd fghjdf hoijdfhoidjfghoidjf ghoijdf ghoijdfgohijd fghoij dfghoijd fgohijdgohidjfghoidjfghoidjnhoidfnh olidfgnhdifgjnhdflgkjhndflkhjndfhlkdjfnhlkdjfnhlkdfjhn dofkhn dif hdifu hodihn oidhn oidn dfoinh oidfhn oidfnh oidfunh odfinh odfinh oidfn hoidfnh oidfn hofdnh oifdgnhodfknh odlfghndfpohjndfoihndfgohindfo hijndfghijdfnho dfiunho idfjhnodfiuhndfoihndfggohjndfo hudfn holdifnhodfiuhn dfihn dfohinmfd ohiudfn hpjdnf
-
-		</div>
+<head>
+	<meta charset=utf-8>
+	<title>Lops</title>
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;700&display=swap" rel="stylesheet">
 
 
 
-		<script type="module">
-			import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/build/three.module.js';
-			import {OrbitControls} from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/controls/OrbitControls.js';
-			import {OBJLoader2} from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/loaders/OBJLoader2.js';
-			import {MTLLoader} from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/loaders/MTLLoader.js';
-			import {MtlObjBridge} from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/loaders/obj2/bridge/MtlObjBridge.js';
+	<link rel="stylesheet" href="styles.css">
 
-			function main() {
-			  const canvas = document.querySelector('#c');
-			  const renderer = new THREE.WebGLRenderer({canvas});
+</head>
 
-			  const fov = 45;
-			  const aspect = 2;  // the canvas default
-			  const near = 0.1;
-			  const far = 100;
-			  const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-			  camera.position.set(0, 10, 20);
+<body>
+<div class="flex-container">
+	<div id="list">
+		<ul>
+			<li> <a href=""> Hello :-) </a> </li>
+			<li> <a href="">
+					< about me </a>
+			</li>
+			<li> <a href="">
+					< my work </a>
+			</li>
+			<div>
+				<ul>
+					<li>TRABALHO 1</li>
+					<li> OI MAE </li>
+					<li> asubdfsddiu </li>
+				</ul>
+			</div>
+		</ul>
 
-			  const controls = new OrbitControls(camera, canvas);
-			  controls.target.set(0, 5, 0);
-			  controls.update();
+	</div>
 
-			  const scene = new THREE.Scene();
-			  scene.background = new THREE.Color('white');
+	<canvas id="c"> </canvas>
 
-			  {
-			    const skyColor = 0xB1E1FF;  // light blue
-			    const groundColor = 0xB97A20;  // brownish orange
-			    const intensity = 1;
-			    const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
-			    scene.add(light);
-			  }
+	<div id="description">
+		aqui fica no canto lorem ipsum abejoadfsnjiasufhn san dfijnsdif asdifn sadifn sdaifnsdflksnadflkadsnfklsadhf
+		uisdahf oasdifnbsadjofnsadlkfnsoa fdhoijdfgihojd fghjdf hoijdfhoidjfghoidjf ghoijdf ghoijdfgohijd fghoij
+		dfghoijd fgohijdgohidjfghoidjfghoidjnhoidfnh olidfgnhdifgjnhdflgkjhndflkhjndfhlkdjfnhlkdjfnhlkdfjhn dofkhn dif
+		hdifu hodihn oidhn oidn dfoinh oidfhn oidfnh oidfunh odfinh odfinh oidfn hoidfnh oidfn hofdnh oifdgnhodfknh
+		odlfghndfpohjndfoihndfgohindfo hijndfghijdfnho dfiunho idfjhnodfiuhndfoihndfggohjndfo hudfn holdifnhodfiuhn
+		dfihn dfohinmfd ohiudfn hpjdnf
 
-			  {
-			    // const color = 0xFFFFFF;
-			    // const intensity = 0.2;
-			    // const light = new THREE.AmbientLight(color, intensity);
-			    // light.position.set(0, 10, 0);
-			    // light.target.position.set(-5, 0, 0);
-			    // scene.add(light);
-			    // scene.add(light.target);
-			    var light = new THREE.AmbientLight( 0xFFFFFF ); // soft white light
-				scene.add( light );
-			  }
+	</div>
+</div>
 
-			  {
-			    const mtlLoader = new MTLLoader();
-				mtlLoader.load('https://raw.githubusercontent.com/Tuniks/detoothe/master/teste2.mtl', (mtlParseResult) => {
-				  const objLoader = new OBJLoader2();
-				  const materials =  MtlObjBridge.addMaterialsFromMtlLoader(mtlParseResult);
-				  objLoader.addMaterials(materials);
-				  objLoader.load('https://raw.githubusercontent.com/Tuniks/detoothe/master/teste2.obj', (root) => {
-				    scene.add(root);
-				  });
-				});
-			  }
 
-			  function resizeRendererToDisplaySize(renderer) {
-			    const canvas = renderer.domElement;
-			    const width = canvas.clientWidth;
-			    const height = canvas.clientHeight;
-			    const needResize = canvas.width !== width || canvas.height !== height;
-			    if (needResize) {
-			      renderer.setSize(width, height, false);
-			    }
-			    return needResize;
-			  }
 
-			  function render() {
+	<script type="module">
+		import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/build/three.module.js';
+		import { OrbitControls } from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/controls/OrbitControls.js';
+		import { OBJLoader2 } from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/loaders/OBJLoader2.js';
+		import { MTLLoader } from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/loaders/MTLLoader.js';
+		import { MtlObjBridge } from 'https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/loaders/obj2/bridge/MtlObjBridge.js';
+		
 
-			    if (resizeRendererToDisplaySize(renderer)) {
-			      const canvas = renderer.domElement;
-			      camera.aspect = canvas.clientWidth / canvas.clientHeight;
-			      camera.updateProjectionMatrix();
-			    }
+		function main() {
+			const canvas = document.querySelector('#c');
+			const renderer = new THREE.WebGLRenderer({ canvas });
 
-			    renderer.render(scene, camera);
+			const fov = 10;
+			const aspect = 2;  // the canvas default
+			const near = 0.09;
+			const far = 900;
+			const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+			camera.position.set(0, 0, 180);
 
-			    requestAnimationFrame(render);
-			  }
+			const controls = new OrbitControls(camera, canvas);
+			controls.target.set(0, 2, 0);
+			controls.update();
 
-			  requestAnimationFrame(render);
+			const scene = new THREE.Scene();
+			scene.background = new THREE.Color('#F7F6F0');
+
+			{
+				const skyColor = "#FFF8F8";  // light blue
+				const groundColor = "#FFF8F8";  // brownish orange
+				const intensity = 10;
+				const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
+				scene.add(light);
 			}
 
-			main();
-		</script>
-	</body>
+			{
+				const color = 0xFFFFFF;
+				// const intensity = 0.2;
+				// const light = new THREE.AmbientLight(color, intensity);
+				// light.position.set(0, 10, 0);
+				// light.target.position.set(-5, 0, 0);
+				// scene.add(light);
+				// scene.add(light.target);
+				var light = new THREE.AmbientLight(0xFFFFFF); // soft white light
+				scene.add(light);
+			}
+
+			{
+				const mtlLoader = new MTLLoader();
+				mtlLoader.load('https://raw.githubusercontent.com/Tuniks/detoothe/master/teste2.mtl', (mtlParseResult) => {
+					const objLoader = new OBJLoader2();
+					const materials = MtlObjBridge.addMaterialsFromMtlLoader(mtlParseResult);
+					objLoader.addMaterials(materials);
+					objLoader.load('https://raw.githubusercontent.com/Tuniks/detoothe/master/teste2.obj', (root) => {
+						scene.add(root);
+						
+						
+					});
+
+				});
+			}
+
+			function resizeRendererToDisplaySize(renderer) {
+				const canvas = renderer.domElement;
+				const pixelRatio = window.devicePixelRatio;
+				const width = canvas.clientWidth * pixelRatio | 0;
+				const height = canvas.clientHeight * pixelRatio | 0;
+				const needResize = canvas.width !== width || canvas.height !== height;
+				if (needResize) {
+					renderer.setSize(1920, 1920, false);
+				}
+				return needResize;
+			}
+			function render() {
+
+				if (resizeRendererToDisplaySize(renderer)) {
+					const canvas = renderer.domElement;
+					camera.aspect = canvas.clientWidth / canvas.clientHeight;
+					camera.updateProjectionMatrix();
+
+				}
+
+				renderer.render(scene, camera);
+
+				requestAnimationFrame(render);
+			}
+
+			requestAnimationFrame(render);
+		}
+
+		main();
+	</script>
+</body>
+
 </html>
